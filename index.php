@@ -5,10 +5,8 @@ if (isset($_GET['page'])) {
 }
 else {
     $page = 'main';
-    $_SESSION['role'] = 'null';
 }
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +18,7 @@ else {
 <?php
 include 'includes/nav/navbar.php';
 
-include 'includes/contents/'.$page.'.php';
+include 'includes/contents/'. $page .'.php';
 ?>
 
 </body>

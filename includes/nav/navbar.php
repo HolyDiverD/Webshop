@@ -2,12 +2,12 @@
 
 ?>
 <div class="navbar">
-    <a class="home fa fa-home" href="#home">Home</a>
+    <a class="home fa fa-home" href="index.php?page=main">Home</a>
     <div class="subnav">
         <button class="subnavbtn" >User <i class="fa fa-caret-down"></i></button>
         <div class="subnav-content">
-            <a href="#login">Login</a>
-            <a href="#register">Register</a>
+            <a href="index.php?page=login">Login</a>
+            <a href="index.php?page=register">Register</a>
         </div>
     </div>
     <div class="subnav">
