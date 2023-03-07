@@ -1,4 +1,19 @@
 <?php
+$alertwrongpassword = $_SESSION['AlertWrongPassword'];
+$alertnoemail = $_SESSION['AlertNoEmail'];
+if ($alertwrongpassword == 'true') {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("Login failed, password is incorrect. Please try again."); } 
+</script>';
+}
+$_SESSION['AlertWrongPassword'] = '';
+
+if ($alertnoemail == 'true') {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("Login failed, email does not exist. Please try again."); } 
+</script>';
+}
+$_SESSION['AlertNoEmail'] = '';
 ?>
 <div class="Logincontainer">
     <form action="../../actions/action/loginaction.php" method="post" id="Login">

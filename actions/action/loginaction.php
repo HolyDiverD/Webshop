@@ -4,7 +4,7 @@ require '../../../private/conn_Webshop.php';
 
 $inputpassword = $_POST['psw'];
 
-$sql = 'SELECT user_id, user_email, user_firstname, user_password, FKuser_role
+$sql = 'SELECT user_id, user_email, user_firstname, user_lastname, user_password, FKuser_role
         FROM users 
         WHERE user_email = :username';
 $sth = $dbh->prepare(
@@ -17,7 +17,13 @@ if ($rsUser = $sth->fetch(PDO::FETCH_ASSOC)){
         $_SESSION['role'] = $rsUser['FKuser_role'];
         $_SESSION['Userid'] = $rsUser['user_id'];
         $_SESSION['User_Name'] = $rsUser['user_firstname'];
-        header('Location: ../../Webshop/index.php?page=main');
+        $_SESSION['User_LastName'] = $rsUser['user_lastname'];
+        if ($_SESSION['role'] == '1'){
+            header('Location: ../../Webshop/index.php?page=main');
+        }
+        elseif($_SESSION['role'] == '2'){
+            header('Location: ../../Webshop/index.php?page=admin');
+        }
     }
     else {
         $_SESSION['AlertWrongPassword'] = 'true';
@@ -26,6 +32,6 @@ if ($rsUser = $sth->fetch(PDO::FETCH_ASSOC)){
 }
 else {
     $_SESSION['AlertNoEmail'] = 'true';
-    header('Location: ../../Webshop/index.php?page=main');
+    header('Location: ../../Webshop/index.php?page=login');
 }
 

@@ -110,3 +110,25 @@ input {
     border-radius: 4px;
     box-sizing: border-box;
 }
+.adminlogo{
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+}
+.adminmain{
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+.cat_add{
+
+    text-align: center;
+    background-color: #f2f2f2;
+    width: 40%;
+    padding: 10px;
+    margin-top: 10%;
+    margin-left: 30%;
+    border-radius: 5px;
+}
