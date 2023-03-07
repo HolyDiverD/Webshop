@@ -1,14 +1,14 @@
 <?php
 $role = $_SESSION['role'];
+$name = $_SESSION['User_Name'];
 
-if ($role == 'customer'){
+if ($role == '1'){
     echo'<div class="navbar">
     <a class="home fa fa-home" href="index.php?page=main">Home</a>
     <div class="subnav">
-        <button class="subnavbtn">User <i class="fa fa-caret-down"></i></button>
+        <button class="subnavbtn">'.$name.' <i class="fa fa-caret-down"></i></button>
         <div class="subnav-content">
-            <a href="index.php?page=login">Login</a>
-            <a href="index.php?page=register">Register</a>
+            <a href="index.php?page=logout">Logout</a>
         </div>
     </div>
     <div class="subnav">

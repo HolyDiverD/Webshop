@@ -1,12 +1,18 @@
 <?php
 session_start();
+if ($_SESSION['role'] == ''){
+    $_SESSION['User_Name'] = '';
+}
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 }
 else {
     $page = 'main';
 }
-$_SESSION['role'] = '';
+if ($page == 'logout'){
+    $_SESSION['role'] = '';
+    $page = 'main';
+}
 ?>
 <html lang="en">
 <head>
