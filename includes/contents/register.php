@@ -1,4 +1,11 @@
 <?php
+$alert = $_SESSION['registeralert'];
+if ($alert == 'true') {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("Registration failed, please check if user data has been filled in correctly."); } 
+</script>';
+}
+$_SESSION['registeralert'] = '';
 ?>
 <div class="Logincontainer">
     <form action="../../actions/action/registeraction.php" method="post" id="register">
@@ -21,7 +28,7 @@
         <input type="text" name="postalcode" required>
 
         <label for="email"><b>Email</b></label>
-        <input type="email" name="email"  required>
+        <input type="email" name="email" required>
 
         <label for="password"><b>Password</b></label>
         <input type="password" name="password" required>
@@ -30,6 +37,12 @@
         <input type="password" name="rpassword" required>
 
     </form>
-    <button class="loginsubmit" type="submit" form="register" onclick="return confirm('Are you sure you want to submit this info?');">Enter</button>
+    <button class="loginsubmit" type="submit" form="register"
+            onclick="return confirm('Are you sure you want to submit this info?');">Enter
+    </button>
 
 </div>
+
+
+
+

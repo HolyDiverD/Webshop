@@ -6,6 +6,7 @@ if (isset($_GET['page'])) {
 else {
     $page = 'main';
 }
+$_SESSION['role'] = '';
 ?>
 <html lang="en">
 <head>

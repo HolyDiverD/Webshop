@@ -14,12 +14,57 @@ $repeatpass = $_POST["rpassword"];
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 try{
-    if ($password == $repeatpass && $residence != ""){
-      echo 'YIPPIE';
+    if ($password == $repeatpass &&
+        strlen($password) >= 15 &&
+        $firstname != '' &&
+        $lastname != '' &&
+        $residence != '' &&
+        $street != '' &&
+        $housenumber != '' &&
+        $postalcode != '' &&
+        $email != '' &&
+        $password != '' &&
+        $repeatpass != '')
+    {
+        $sql = 'INSERT INTO users(
+                   user_email,
+                   user_password, 
+                   FKuser_role, 
+                   user_firstname, 
+                   user_lastname, 
+                   user_residence, 
+                   user_street, 
+                   user_housenumber,
+                   user_postalcode) 
+                   VALUES 
+                 (:email, 
+                  :password,
+                  :Klant,
+                  :firstname,
+                  :lastname,
+                  :residence,
+                  :street,
+                  :housenumber,
+                  :postcode
+                  )';
+
+        $sth = $dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth->execute([
+            ':email' => $email,
+            ':password' => $hash,
+            ':Klant' => '1',
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':residence' => $residence,
+            ':street' => $street,
+            ':housenumber' => $housenumber,
+            ':postcode' => $postalcode
+        ]);
+        header('Location: ../../Webshop/index.php?page=main');
     }
     else{
-     echo'<script> alert("User info was not put in correctly!");window.location="../../Webshop/index.php?page=register"';
-     header('Location: ../../Webshop/index.php?page=register');
+        $_SESSION['registeralert'] = 'true';
+        header('Location: ../../Webshop/index.php?page=register');
     }
 }
 catch (PDOException $exception){
