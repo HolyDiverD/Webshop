@@ -11,9 +11,5 @@ while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
     echo '<a href="actions/action/cat_delete_action.php?cat_id='.$row->category_id.'"/>';
     echo 'Delete';
     echo '</td>';
-    echo '<td data-label="Edit">';
-    echo '<a href="index.php?page="/>';
-    echo 'Edit';
-    echo '</td>';
     echo '</tr>';
 }

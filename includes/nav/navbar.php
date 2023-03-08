@@ -40,7 +40,7 @@ if ($role == '1') {
         <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
         <div class="subnav-content">
             <a href="index.php?page=category_add">Add</a>
-            <a href="index.php?page=">Edit</a>
+            <a href="index.php?page=category_edit">Edit</a>
             <a href="index.php?page=category_delete">Delete</a>
         </div>
     </div>
