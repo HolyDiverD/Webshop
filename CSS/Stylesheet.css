@@ -132,3 +132,23 @@ input {
     margin-left: 30%;
     border-radius: 5px;
 }
+.AdminTable_con {
+    margin-top: 5%;
+    margin-left: 25%;
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 50%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table header, td {
+    padding: 12px 15px;
+    border: 1px solid #000000;
+    text-align: center;
+}

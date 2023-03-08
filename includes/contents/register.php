@@ -1,6 +1,5 @@
 <?php
-$alert = $_SESSION['registeralert'];
-if ($alert == 'true') {
+if ($_SESSION['registeralert'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Registration failed, please check if user data has been filled in correctly."); } 
 </script>';

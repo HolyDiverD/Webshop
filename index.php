@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '../private/conn_Webshop.php';
 if ($_SESSION['role'] == ''){
     $_SESSION['User_Name'] = '';
 }
