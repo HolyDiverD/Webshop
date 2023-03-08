@@ -1,16 +1,21 @@
 <?php
+if(is_null($_SESSION['CatAddFail'])){
+    $_SESSION['CatAddFail'] = '';
+}
+if(is_null($_SESSION['CatAddSuccess'])){
+    $_SESSION['CatAddSuccess'] = '';
+}
 if($_SESSION['CatAddFail'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category already exists!"); } 
 </script>';
 }
-   $_SESSION['CatAddFail'] = '';
 if($_SESSION['CatAddSuccess'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category was successfully added!"); } 
 </script>';
 }
-$_SESSION['CatAddSuccess'] = '';
+
 ?>
 <div class="cat_add">
     <form action="../../actions/action/cat_add_action.php" method="post" id="Add">
