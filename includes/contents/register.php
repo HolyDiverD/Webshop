@@ -1,16 +1,21 @@
 <?php
+if (is_null($_SESSION['registeralert'])){
+    $_SESSION['registeralert'] = '';
+}
+if (is_null($_SESSION['SameEmail'])){
+    $_SESSION['SameEmail'] = '';
+}
+
 if ($_SESSION['registeralert'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Registration failed, please check if user data has been filled in correctly."); } 
 </script>';
 }
-$_SESSION['registeralert'] = '';
 if ($_SESSION['SameEmail'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("An account for this email already exists."); } 
 </script>';
 }
-$_SESSION['SameEmail'] = '';
 ?>
 <div class="Logincontainer">
     <form action="../../actions/action/registeraction.php" method="post" id="register">
