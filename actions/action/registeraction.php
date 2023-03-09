@@ -37,6 +37,7 @@ try {
                 $street != '' &&
                 $housenumber != '' &&
                 $postalcode != '' &&
+                (strlen($postalcode)) == 6 &&
                 $email != '' &&
                 $password != '' &&
                 $repeatpass != '') {
