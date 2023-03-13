@@ -3,7 +3,7 @@ $categoryID = $_GET['ID'];
 
 try{
     $sth = $dbh->prepare("
-SELECT product_id, product_name, product_EAN, product_price
+SELECT product_id, product_name, product_EAN, product_price, product_img
 FROM products
 WHERE FKcategory_id = :categoryid");
 
@@ -22,7 +22,7 @@ WHERE FKcategory_id = :categoryid");
           echo 'EAN: '.$row->product_EAN.'<br><br>';
           echo 'Price: €'.$row->product_price.',-';
           echo '</p>';
-          echo '<button class="loginsubmit" type="button" value="" onclick="return confirm('."Do you want to add this item to the shopping cart?".')"';
+          echo '<button class="AddToCartBttn" type="button" value="" onclick="return confirm('."Do you want to add this item to the shopping cart?".')"';
           echo '</div>Add to cart</button>';
           echo '</div>';
       }
@@ -30,6 +30,7 @@ WHERE FKcategory_id = :categoryid");
 }catch (PDOException $exception){
     $exception->getMessage();
 }
+
 ?>
 
 

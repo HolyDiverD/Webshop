@@ -10,11 +10,13 @@ if($_SESSION['product_add_fail'] == 'true') {
        window.onload = function () { alert("Product already exists!"); } 
 </script>';
 }
+$_SESSION['product_add_fail'] = '';
 if($_SESSION['product_add_success'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully added!"); } 
 </script>';
 }
+$_SESSION['product_add_success'] = '';
 ?>
 <div class="add">
     <form action="actions/action/product_add_action.php" method="post" id="Add">
