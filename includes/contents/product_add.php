@@ -36,6 +36,11 @@ if($_SESSION['product_add_success'] == 'true') {
         </label>
         <input type="text" placeholder="Enter Amount" name="amount" required>
 
+        <label for="img">
+            <b>Image</b>
+        </label>
+        <input type="text" placeholder="Enter image url" name="img" required>
+
         <?php
         include 'actions/sa/product_cat_sa.php';
         ?>

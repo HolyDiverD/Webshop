@@ -7,6 +7,7 @@ $EAN = $_POST['ean'];
 $price = $_POST['price'];
 $amount = $_POST['amount'];
 $category = $_POST['category'];
+$image = $_POST['img'];
 
 echo $productname;
 echo $EAN;
@@ -32,9 +33,9 @@ try {
         $sth = $dbh->prepare("
     INSERT INTO
     products
-        (product_name, product_EAN, product_price, product_amount, FKcategory_id)
+        (product_name, product_EAN, product_price, product_amount, FKcategory_id, product_img)
     VALUE
-        (:productname, :productEAN, :productprice, :productamount, :category)",
+        (:productname, :productEAN, :productprice, :productamount, :category, :image)",
             array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute([
@@ -42,7 +43,8 @@ try {
             ':productEAN' => $EAN,
             ':productprice' => $price,
             ':productamount' => $amount,
-            ':category' => $category
+            ':category' => $category,
+            ':image' => $image
         ]);
         $_SESSION['product_add_success'] = 'true';
         header('Location: ../../index.php?page=product_add');

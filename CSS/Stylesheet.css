@@ -172,4 +172,5 @@ table {
 }
 .product_list_img{
     float: left;
+    padding: 5px;
 }

@@ -2,10 +2,13 @@
 
 $role = $_SESSION['role'];
 $name = $_SESSION['User_Name'];
+try{
 
-$sth = $dbh->prepare("SELECT category_name FROM categories ");
+}catch (PDOException $exception){
+    $exception->getMessage();
+}
+$sth = $dbh->prepare("SELECT category_id, category_name FROM categories ");
 $sth->execute();
-
 
 if ($role == '1') {
     echo '<div class="navbar">';
@@ -20,7 +23,7 @@ if ($role == '1') {
     echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
     echo '<div class="subnav-content">';
     while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-        echo '<a href="index.php?page=products&cat='.$row->category_id.'">' . $row->category_name . '</a>';
+        echo '<a href="index.php?page=products&ID='.$row->category_id.'&cat='.$row->category_name.'">' . $row->category_name . '</a>';
     }
     echo '</div>';
     echo '</div>';
@@ -68,7 +71,7 @@ if ($role == '1') {
     echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
     echo '<div class="subnav-content">';
     while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-        echo '<a href="index.php?page=products&cat='.$row->category_name.'">' . $row->category_name . '</a>';
+        echo '<a href="index.php?page=products&ID='.$row->category_id.'&cat='.$row->category_name.'">' . $row->category_name . '</a>';
     }
     echo '</div>';
     echo '</div>';
