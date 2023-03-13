@@ -47,7 +47,7 @@ if ($role == '1') {
     <div class="subnav">
         <button class="subnavbtn">Products <i class="fa fa-caret-down"></i></button>
         <div class="subnav-content">
-            <a href="index.php?page=products_add">Add</a>
+            <a href="index.php?page=product_add">Add</a>
             <a href="index.php?page=">Edit</a>
             <a href="index.php?page=">Delete</a>
         </div>
