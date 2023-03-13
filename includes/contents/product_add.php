@@ -1,7 +1,10 @@
 <?php
+if(is_null($_SESSION['product_add_fail'])){
+    $_SESSION['product_add_fail'] = '';
+}
 ?>
 <div class="add">
-    <form action="" method="post" id="Add">
+    <form action="actions/action/product_add_action.php" method="post" id="Add">
         <label for="name"><b>Product name</b></label>
         <input type="text" placeholder="Enter product name" name="name" required>
 
@@ -14,6 +17,11 @@
             <b>Price</b>
         </label>
         <input type="text" placeholder="Enter Price" name="price" required>
+
+        <label for="amount">
+            <b>Amount</b>
+        </label>
+        <input type="text" placeholder="Enter Amount" name="amount" required>
 
         <?php
         include 'actions/sa/product_cat_sa.php';
