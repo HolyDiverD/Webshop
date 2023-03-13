@@ -20,7 +20,7 @@ if ($role == '1') {
     echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
     echo '<div class="subnav-content">';
     while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-        echo '<a href="index.php?page=products&cat='.$row->category_name.'">' . $row->category_name . '</a>';
+        echo '<a href="index.php?page=products&cat='.$row->category_id.'">' . $row->category_name . '</a>';
     }
     echo '</div>';
     echo '</div>';
@@ -68,7 +68,7 @@ if ($role == '1') {
     echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
     echo '<div class="subnav-content">';
     while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-        echo '<a href="#bring">' . $row->category_name . '</a>';
+        echo '<a href="index.php?page=products&cat='.$row->category_name.'">' . $row->category_name . '</a>';
     }
     echo '</div>';
     echo '</div>';

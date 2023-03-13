@@ -153,7 +153,6 @@ table {
     text-align: center;
 }
 .editinput{
-
     text-align: center;
     background-color: #f2f2f2;
     width: 50%;
@@ -161,4 +160,16 @@ table {
     margin-top: 5%;
     margin-left: 25%;
     border-radius: 5px;
+}
+.product_list_view{
+    text-align: left;
+    background-color: #f2f2f2;
+    width: 40%;
+    padding: 20px;
+    margin-top: 5%;
+    margin-left: 10%;
+    border-radius: 5px;
+}
+.product_list_img{
+    float: left;
 }

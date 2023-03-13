@@ -44,8 +44,8 @@ try {
             ':productamount' => $amount,
             ':category' => $category
         ]);
-        $_SESSION['CatAddSuccess'] = 'true';
-        header('Location: ../../Webshop/index.php?page=product_add');
+        $_SESSION['product_add_success'] = 'true';
+        header('Location: ../../index.php?page=product_add');
     }
 } catch (PDOException $exception) {
     $exception->getMessage();
