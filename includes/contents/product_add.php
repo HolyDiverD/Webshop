@@ -5,6 +5,9 @@ if(is_null($_SESSION['product_add_fail'])){
 if(is_null($_SESSION['product_add_success'])){
     $_SESSION['product_add_success'] = '';
 }
+if(is_null($_SESSION['product_input_fail'])){
+    $_SESSION['product_input_fail'] = '';
+}
 if($_SESSION['product_add_fail'] == 'true') {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product already exists!"); } 
@@ -17,6 +20,12 @@ if($_SESSION['product_add_success'] == 'true') {
 </script>';
 }
 $_SESSION['product_add_success'] = '';
+if($_SESSION['product_input_fail'] == 'true') {
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("Not every required field was filled in."); } 
+</script>';
+}
+$_SESSION['product_input_fail'] = '';
 ?>
 <div class="add">
     <form action="actions/action/product_add_action.php" method="post" id="Add">

@@ -1,6 +1,6 @@
 <?php
 ?>
-<div class="AdminTable_con">
+<div class="add">
     <table class="admintable" id = table>
         <tr>
             <th>Category</th>

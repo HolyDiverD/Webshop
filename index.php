@@ -4,7 +4,6 @@ require '../private/conn_Webshop.php';
 if (is_null($_SESSION['role'])){
     $_SESSION['role'] = '';
 }
-
 if ($_SESSION['role'] == ''){
     $_SESSION['User_Name'] = '';
 }
