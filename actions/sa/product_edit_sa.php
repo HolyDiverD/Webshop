@@ -1,8 +1,10 @@
 <?php
+
 try{
     $sth = $dbh->prepare("
-SELECT product_id, product_name, product_EAN, product_amount, product_price
-FROM products");
+SELECT product_id, product_name, product_EAN, product_amount, product_price, FKcategory_id
+FROM products
+");
 
     $sth->execute();
     while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
@@ -15,6 +17,9 @@ FROM products");
               </td>';
         echo '<td data-label="EAN">
               ' . $row->product_EAN . '
+              </td>';
+        echo '<td data-label="Category">
+              ' . $row->FKcategory_id . '
               </td>';
         echo '<td data-label="Amount">
               ' . $row->product_amount . '

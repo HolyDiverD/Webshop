@@ -139,6 +139,15 @@ input {
     border-radius: 5px;
     width: 50%;
 }
+.product_edit_view{
+    margin-top: 5%;
+    margin-left: 15%;
+    padding: 25px;
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 70%;
+}
 table {
     width: 100%;
     border-collapse: collapse;
