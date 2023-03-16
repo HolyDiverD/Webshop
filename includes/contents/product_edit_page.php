@@ -5,16 +5,12 @@ $productEAN = $_GET['product_ean'];
 $productamount = $_GET['product_amount'];
 $productprice = $_GET['product_price'];
 
-if(is_null($_SESSION['product_edit_fail'])){
-    $_SESSION['product_edit_fail'] = '';
-}
-
-if($_SESSION['product_edit_fail'] == 'true') {
+if(isset($_SESSION['product_edit_fail'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Not all required fields are filled in."); } 
 </script>';
+    unset($_SESSION['product_edit_fail']);
 }
-$_SESSION['product_edit_fail'] = '';
 
 echo '</div>
 <div class="editinput">

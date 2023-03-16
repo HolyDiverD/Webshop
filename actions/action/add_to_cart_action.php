@@ -1,4 +1,6 @@
 <?php
+echo "<pre>", print_r($_GET), "</pre>";
+echo "<pre>", print_r($_POST), "</pre>";
 session_start();
 require '../../../private/conn_Webshop.php';
 
@@ -7,7 +9,7 @@ $productid = $_GET['pro_id'];
 
 try{
     $sth = $dbh->prepare("
-SELECT FKproduct_id, FKuser_id, product_name, product_EAN, product_price, amount
+SELECT FKproduct_id, FKuser_id, amount
 FROM shoppingbag
 WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -31,15 +33,15 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
     }
     else{
     $stmt = $dbh->prepare("
-    INSERT INTO shoppingbag (FKuser_id, FKproduct_id, product_name, product_EAN, product_price, amount)
-VALUES (value1, value2, value3, ...);
-    
-    
-    ");
+    INSERT INTO shoppingbag (FKuser_id, FKproduct_id, amount)
+VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
+    $stmt->execute([
+        ':userid' => $userid,
+        ':productid' => $productid
+    ]);
+        header('Location:  ../../index.php?page=products');
     }
-
-
 }
 catch(PDOException $exception){
     $exception->getMessage();

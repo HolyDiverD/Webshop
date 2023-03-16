@@ -2,7 +2,7 @@
 try{
     $sth = $dbh->prepare("
 SELECT category_id, category_name
-FROM categories");
+FROM categories", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
     $sth->execute();
 

@@ -3,7 +3,7 @@ echo '</div>
 <div class="editinput">
     <form action="actions/action/cat_edit_action.php?category_id='.$_GET['cat_id'].'" method="post" id="Add">
         <label for="category_name">
-            <b>Category</b>
+            <b>Edit category</b>
         </label>
         <input type="text" placeholder="Enter category" name="category_name" value="'.$_GET['cat_name'].'" required>
     </form>';

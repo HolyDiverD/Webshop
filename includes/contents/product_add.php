@@ -1,31 +1,22 @@
 <?php
-if(is_null($_SESSION['product_add_fail'])){
-    $_SESSION['product_add_fail'] = '';
-}
-if(is_null($_SESSION['product_add_success'])){
-    $_SESSION['product_add_success'] = '';
-}
-if(is_null($_SESSION['product_input_fail'])){
-    $_SESSION['product_input_fail'] = '';
-}
-if($_SESSION['product_add_fail'] == 'true') {
+if(isset($_SESSION['product_add_fail'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product already exists!"); } 
 </script>';
+    unset($_SESSION['product_add_fail']);
 }
-$_SESSION['product_add_fail'] = '';
-if($_SESSION['product_add_success'] == 'true') {
+if(isset($_SESSION['product_add_success'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully added!"); } 
 </script>';
+    unset($_SESSION['product_add_success']);
 }
-$_SESSION['product_add_success'] = '';
-if($_SESSION['product_input_fail'] == 'true') {
+if(isset($_SESSION['product_input_fail'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Not every required field was filled in."); } 
 </script>';
+    unset($_SESSION['product_input_fail']);
 }
-$_SESSION['product_input_fail'] = '';
 ?>
 <div class="add">
     <form action="actions/action/product_add_action.php" method="post" id="Add">

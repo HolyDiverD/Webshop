@@ -1,14 +1,11 @@
 <?php
 
-if(is_null($_SESSION['product_edit_success'])) {
-    $_SESSION['product_edit_success'] = '';
-}
-if($_SESSION['product_edit_success'] == 'true') {
+if(isset($_SESSION['product_edit_success'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully edited!"); } 
 </script>';
+    unset($_SESSION['product_edit_success']);
 }
-$_SESSION['product_edit_success'] = '';
 ?>
 
 <div class="product_edit_view">

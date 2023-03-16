@@ -1,21 +1,18 @@
 <?php
-if (is_null($_SESSION['AlertWrongPassword'])){
-    $_SESSION['AlertWrongPassword'] = '';
-}
-if (is_null($_SESSION['AlertNoEmail'])){
-    $_SESSION['AlertNoEmail'] = '';
-}
 
-if ($_SESSION['AlertWrongPassword'] == 'true') {
+if(isset($_SESSION['AlertWrongPassword'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Login failed, password is incorrect. Please try again."); } 
-</script>';
+   </script>';
+    unset($_SESSION['AlertWrongPassword']);
 }
-if ($_SESSION['AlertNoEmail'] == 'true') {
+if(isset($_SESSION['AlertNoEmail'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Login failed, email does not exist. Please try again."); } 
-</script>';
+   </script>';
+    unset($_SESSION['AlertNoEmail']);
 }
+
 
 ?>
 <div class="Logincontainer">

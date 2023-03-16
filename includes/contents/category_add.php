@@ -1,19 +1,15 @@
 <?php
-if(is_null($_SESSION['CatAddFail'])){
-    $_SESSION['CatAddFail'] = '';
-}
-if(is_null($_SESSION['CatAddSuccess'])){
-    $_SESSION['CatAddSuccess'] = '';
-}
-if($_SESSION['CatAddFail'] == 'true') {
+if(isset($_SESSION['CatAddFail'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category already exists!"); } 
-</script>';
+    </script>';
+    unset($_SESSION['CatAddFail']);
 }
-if($_SESSION['CatAddSuccess'] == 'true') {
+if(isset($_SESSION['CatAddSuccess'])){
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category was successfully added!"); } 
 </script>';
+    unset($_SESSION['CatAddSuccess']);
 }
 
 ?>

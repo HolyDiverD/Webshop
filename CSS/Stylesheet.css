@@ -174,9 +174,10 @@ table {
     border-radius: 5px;
 }
 .product_list_view{
+
     text-align: left;
     background-color: #f2f2f2;
-    width: 40%;
+    width: 25%;
     padding: 20px;
     margin-top: 2%;
     margin-left: 10%;
@@ -185,9 +186,9 @@ table {
 }
 .product_list_img{
     float: left;
-    padding: 5px;
+
+    text-align: center;
     width:100%;
-    max-width:600px;
 }
 .AddToCartBttn{
     box-sizing: border-box;
@@ -196,4 +197,8 @@ table {
     color: #f2f2f2;
     border-radius: 4px;
     border: 1px solid #000000;
+}
+
+.myimage{
+    max-width: 100%;
 }
