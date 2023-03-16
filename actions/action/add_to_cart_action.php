@@ -6,6 +6,20 @@ require '../../../private/conn_Webshop.php';
 
 $userid = $_SESSION['Userid'];
 $productid = $_GET['pro_id'];
+$categoryid = $_GET['cat_id'];
+$productname = $_GET['pro_name'];
+$productEAN = $_GET['pro_EAN'];
+$productprice = $_GET['pro_price'];
+
+if ($_SESSION['role'] == ''){
+    $_SESSION['Guest_Product_Name'] = $productname;
+    $_SESSION['Guest_Product_EAN'] = $productEAN;
+    $_SESSION['Guest_Product_Price'] = $productprice;
+
+}
+else {
+
+}
 
 try{
     $sth = $dbh->prepare("
@@ -28,8 +42,8 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
             ':productid' => $productid,
             ':userid' => $userid
         ]);
-
-        header('Location:  ../../index.php?page=products');
+        $_SESSION['AnotherOne'] = 'true';
+        header('Location:  ../../index.php?page=products&ID='.$categoryid.'');
     }
     else{
     $stmt = $dbh->prepare("
@@ -40,7 +54,19 @@ VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY)
         ':userid' => $userid,
         ':productid' => $productid
     ]);
-        header('Location:  ../../index.php?page=products');
+
+    $stmt = $dbh->prepare("
+    UPDATE products 
+    SET product_amount = (product_amount - 1)
+    WHERE product_id = :productid
+    ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+    $stmt->execute([
+        ':productid' => $productid
+    ]);
+
+        $_SESSION['AddCartSuccess'] = 'true';
+        header('Location:  ../../index.php?page=products&ID='.$categoryid.'');
     }
 }
 catch(PDOException $exception){
