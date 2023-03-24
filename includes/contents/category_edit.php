@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="add">
-    <table class="admintable" id = table>
+    <table class="admintable" id=table>
         <tr>
             <th>Category</th>
             <th>Edit</th>

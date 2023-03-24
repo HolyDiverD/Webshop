@@ -14,7 +14,7 @@ try {
     $sth->execute([
         ':categoryid' => $category_id
     ]);
-    header('Location:  ../../index.php?page=category_delete');
+    header('Location: ../../index.php?page=category_delete');
 
 }catch (PDOException $exception){
     $exception->getMessage();

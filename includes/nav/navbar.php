@@ -2,7 +2,7 @@
 
 $role = $_SESSION['role'];
 $name = $_SESSION['User_Name'];
-try{
+try {
     $sth = $dbh->prepare("SELECT category_id, category_name FROM categories ");
     $sth->execute();
 
@@ -19,11 +19,11 @@ try{
         echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
         echo '<div class="subnav-content">';
         while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-            echo '<a href="index.php?page=products&ID='.$row->category_id.'&cat='.$row->category_name.'">' . $row->category_name . '</a>';
+            echo '<a href="index.php?page=products&ID=' . $row->category_id . '&cat=' . $row->category_name . '">' . $row->category_name . '</a>';
         }
         echo '</div>';
         echo '</div>';
-        echo '<a class="fa fa-shopping-cart cart" href="../contents/shoppingcart.php"></a>';
+        echo '<a class="fa fa-shopping-cart cart" href="../../Webshop/index.php?page=shoppingcart"></a>';
         echo '</div>';
 
     } elseif ($role == '2') {
@@ -67,16 +67,16 @@ try{
         echo '<button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>';
         echo '<div class="subnav-content">';
         while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-            echo '<a href="index.php?page=products&ID='.$row->category_id.'&cat='.$row->category_name.'">' . $row->category_name . '</a>';
+            echo '<a href="index.php?page=products&ID=' . $row->category_id . '&cat=' . $row->category_name . '">' . $row->category_name . '</a>';
         }
         echo '</div>';
         echo '</div>';
-        echo '<a class="fa fa-shopping-cart cart" href="../contents/shoppingcart.php"></a>';
+        echo '<a class="fa fa-shopping-cart cart" href="../../Webshop/index.php?page=shoppingcart"></a>';
 
         echo '</div>';
     }
 
-}catch (PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }
 

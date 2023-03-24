@@ -15,7 +15,8 @@ try {
     $sth->execute([
         ':productid' => $product_id
     ]);
-    header('Location:  ../../index.php?page=product_delete');
+
+    header('Location: ../../Webshop/index.php?page=product_delete');
 
 }catch (PDOException $exception){
     $exception->getMessage();

@@ -1,5 +1,5 @@
 <?php
-try{
+try {
     $sth = $dbh->prepare("
 SELECT category_id, category_name
 FROM categories");
@@ -14,8 +14,7 @@ FROM categories");
         echo '</td>';
         echo '</tr>';
     }
-}
-catch(PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }
 

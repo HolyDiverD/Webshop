@@ -11,17 +11,16 @@ $productname = $_GET['pro_name'];
 $productEAN = $_GET['pro_EAN'];
 $productprice = $_GET['pro_price'];
 
-if ($_SESSION['role'] == ''){
+if ($_SESSION['role'] == '') {
     $_SESSION['Guest_Product_Name'] = $productname;
     $_SESSION['Guest_Product_EAN'] = $productEAN;
     $_SESSION['Guest_Product_Price'] = $productprice;
 
-}
-else {
+} else {
 
 }
 
-try{
+try {
     $sth = $dbh->prepare("
 SELECT FKproduct_id, FKuser_id, amount
 FROM shoppingbag
@@ -32,7 +31,7 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
         ':productid' => $productid
     ]);
 
-    if($sth->rowcount() > 0){
+    if ($sth->rowcount() > 0) {
         $stmt = $dbh->prepare("
         UPDATE shoppingbag 
         SET amount = (amount + 1)
@@ -43,32 +42,30 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
             ':userid' => $userid
         ]);
         $_SESSION['AnotherOne'] = 'true';
-        header('Location:  ../../index.php?page=products&ID='.$categoryid.'');
-    }
-    else{
-    $stmt = $dbh->prepare("
+        header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
+    } else {
+        $stmt = $dbh->prepare("
     INSERT INTO shoppingbag (FKuser_id, FKproduct_id, amount)
 VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-    $stmt->execute([
-        ':userid' => $userid,
-        ':productid' => $productid
-    ]);
+        $stmt->execute([
+            ':userid' => $userid,
+            ':productid' => $productid
+        ]);
 
-    $stmt = $dbh->prepare("
+        $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
     WHERE product_id = :productid
     ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-    $stmt->execute([
-        ':productid' => $productid
-    ]);
+        $stmt->execute([
+            ':productid' => $productid
+        ]);
 
         $_SESSION['AddCartSuccess'] = 'true';
-        header('Location:  ../../index.php?page=products&ID='.$categoryid.'');
+        header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
     }
-}
-catch(PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }

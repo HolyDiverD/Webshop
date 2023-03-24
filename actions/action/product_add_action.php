@@ -28,7 +28,7 @@ try {
         if ($productname != '' &&
             $EAN != '' &&
             $price != '' &&
-            $amount < 0 &&
+            $amount > 0 &&
             $category != '') {
 
             $sth = $dbh->prepare("

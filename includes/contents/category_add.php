@@ -1,11 +1,11 @@
 <?php
-if(isset($_SESSION['CatAddFail'])){
+if (isset($_SESSION['CatAddFail'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category already exists!"); } 
     </script>';
     unset($_SESSION['CatAddFail']);
 }
-if(isset($_SESSION['CatAddSuccess'])){
+if (isset($_SESSION['CatAddSuccess'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Category was successfully added!"); } 
 </script>';

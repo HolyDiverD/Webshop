@@ -1,20 +1,19 @@
 <?php
 session_start();
 require '../private/conn_Webshop.php';
-if (is_null($_SESSION['role'])){
+if (is_null($_SESSION['role'])) {
     $_SESSION['role'] = '';
 }
-if ($_SESSION['role'] == ''){
+if ($_SESSION['role'] == '') {
     $_SESSION['User_Name'] = '';
 }
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
-}
-else {
+} else {
     $page = 'main';
 }
 
-if ($page == 'logout'){
+if ($page == 'logout') {
     $_SESSION['role'] = '';
     $page = 'main';
 }
@@ -30,7 +29,7 @@ if ($page == 'logout'){
 <?php
 include 'includes/nav/navbar.php';
 
-include 'includes/contents/'. $page .'.php';
+include 'includes/contents/' . $page . '.php';
 ?>
 
 </body>

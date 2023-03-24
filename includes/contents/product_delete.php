@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="product_edit_view">
-    <table class="admintable" id = table>
+    <table class="admintable" id=table>
         <tr>
             <th>ID</th>
             <th>Name</th>

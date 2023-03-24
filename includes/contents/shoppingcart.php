@@ -1,12 +1,18 @@
 <?php
-$userid = $_SESSION['Userid'];
-
-$sth = $dbh->prepare("
-SELECT shoppingcart_id, p.product_name, p.product_EAN, p.product_price, amount
-FROM shoppingbag
-JOIN products p on shoppingbag.FKproduct_id = p.product_id
-WHERE FKuser_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-$sth->execute([
-    ':user' => $userid
-]);
+?>
+    <div class="product_edit_view">
+        <table class="admintable" id=table>
+            <tr>
+                <th>Name</th>
+                <th>EAN</th>
+                <th>Price</th>
+                <th>Remove</th>
+                <th>Amount</th>
+                <th>Add</th>
+            </tr>
+            <p> Total Price: <?= $_SESSION['Total_Cart_Price']?> </p>
+            <?php
+            include 'actions/sa/shoppingcart_sa.php';
+            ?>
+        </table>
+    </div>

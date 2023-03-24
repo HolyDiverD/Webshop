@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SESSION['product_edit_success'])) {
+if (isset($_SESSION['product_edit_success'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully edited!"); } 
 </script>';
@@ -9,7 +9,7 @@ if(isset($_SESSION['product_edit_success'])) {
 ?>
 
 <div class="product_edit_view">
-    <table class="admintable" id = table>
+    <table class="admintable" id=table>
         <tr>
             <th>ID</th>
             <th>Name</th>
