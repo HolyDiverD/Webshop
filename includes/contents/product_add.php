@@ -31,12 +31,12 @@ if (isset($_SESSION['product_input_fail'])) {
         <label for="price">
             <b>Price</b>
         </label>
-        <input type="text" placeholder="Enter Price" name="price" required>
+        <input type="text" placeholder="Enter Price" name="price" required min="1">
 
         <label for="amount">
             <b>Amount</b>
         </label>
-        <input type="text" placeholder="Enter Amount" name="amount" required>
+        <input type="text" placeholder="Enter Amount" name="amount" required min="1">
 
         <label for="img">
             <b>Image</b>

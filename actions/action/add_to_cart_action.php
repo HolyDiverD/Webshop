@@ -32,6 +32,17 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
     ]);
 
     if ($sth->rowcount() > 0) {
+
+        $stmt = $dbh->prepare("
+    UPDATE products 
+    SET product_amount = (product_amount - 1)
+    WHERE product_id = :productid
+    ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stmt->execute([
+            ':productid' => $productid
+        ]);
+
         $stmt = $dbh->prepare("
         UPDATE shoppingbag 
         SET amount = (amount + 1)
@@ -41,18 +52,11 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
             ':productid' => $productid,
             ':userid' => $userid
         ]);
+
         $_SESSION['AnotherOne'] = 'true';
         header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
-    } else {
-        $stmt = $dbh->prepare("
-    INSERT INTO shoppingbag (FKuser_id, FKproduct_id, amount)
-VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-        $stmt->execute([
-            ':userid' => $userid,
-            ':productid' => $productid
-        ]);
-
+    }
+    else {
         $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
@@ -60,6 +64,15 @@ VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY)
     ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $stmt->execute([
+            ':productid' => $productid
+        ]);
+
+        $stmt = $dbh->prepare("
+    INSERT INTO shoppingbag (FKuser_id, FKproduct_id, amount)
+VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $stmt->execute([
+            ':userid' => $userid,
             ':productid' => $productid
         ]);
 

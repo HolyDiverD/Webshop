@@ -1,6 +1,26 @@
 <?php
 session_start();
 require '../private/conn_Webshop.php';
+
+$adminpages = array(
+        'admin',
+    'cat_edit_page',
+    'category_add',
+    'category_delete',
+    'category_edit',
+    'product_add',
+    'product_delete',
+    'product_edit',
+    'product_edit_page');
+
+$customerpages = array(
+        'login',
+        'main',
+        'register',
+        'shoppingcart',
+        'products'
+);
+
 if (is_null($_SESSION['role'])) {
     $_SESSION['role'] = '';
 }
@@ -12,10 +32,19 @@ if (isset($_GET['page'])) {
 } else {
     $page = 'main';
 }
-
 if ($page == 'logout') {
     $_SESSION['role'] = '';
+    $_SESSION['Userid'] = '';
     $page = 'main';
+}
+if ($_SESSION['role'] == '' && in_array($page, $adminpages)){
+    $page = 'main';
+}
+if ($_SESSION['role'] == '1' && in_array($page, $adminpages)){
+    $page = 'main';
+}
+if ($_SESSION['role'] == '2' && in_array($page, $customerpages)){
+    $page = 'admin';
 }
 ?>
 <html lang="en">

@@ -32,7 +32,6 @@ WHERE FKcategory_id = :categoryid");
                 <img class="myimage" src="<?= $row->product_img ?>">
             </div>
             <p><?= $row->product_name ?></p>
-            <p>ID: <?= $row->product_id ?></p>
             <p>EAN: <?= $row->product_EAN ?></p>
             <p>Price: €<?= $row->product_price ?>,-</p>
 

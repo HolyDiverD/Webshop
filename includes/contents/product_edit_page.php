@@ -28,12 +28,12 @@ echo '</div>
         <label for="Product_amount">
             <b>Amount</b>
         </label>
-        <input type="text" placeholder="Enter amount" name="Product_amount" value="' . $productamount . '" required>
+        <input type="text" placeholder="Enter amount" name="Product_amount" value="' . $productamount . '" required min="1">
         
         <label for="Product_price">
             <b>Price</b>
         </label>
-        <input type="text" placeholder="Enter product price" name="Product_price" value="' . $productprice . '" required>
+        <input type="text" placeholder="Enter product price" name="Product_price" value="' . $productprice . '" required min="1">
         
         <label for="Product_img">
             <b>Image</b>

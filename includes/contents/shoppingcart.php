@@ -15,4 +15,5 @@
             include 'actions/sa/shoppingcart_sa.php';
             ?>
         </table>
+
     </div>
