@@ -1,7 +1,7 @@
 <?php
 $userid = $_SESSION['Userid'];
 $sth = $dbh->prepare("
-SELECT shoppingcart_id, p.product_name, p.product_EAN, p.product_price, amount
+SELECT shoppingcart_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount
 FROM shoppingbag
 JOIN products p on shoppingbag.FKproduct_id = p.product_id
 WHERE FKuser_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -24,7 +24,7 @@ while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
         <td id=data-label="EAN"> <?= $row->product_EAN ?> </td>
         <td id=data-label="Price"> <?= $row->product_price ?> </td>
         <td id=data-label="Remove">
-            <a href="../../actions/action"/>
+            <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?=$row->product_id?>"/>
             <i class="fa fa-minus"></i>
         </td>
         <td id=data-label="Amount"> <?= $row->amount ?> </td>
