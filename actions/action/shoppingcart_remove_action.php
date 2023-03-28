@@ -29,6 +29,7 @@ if ($_SESSION['role'] == '') {
             ]);
 
             unset($_SESSION['cart'][$productid]);
+            $_SESSION['Total_Cart_Price'] = 0;
             header('Location: ../../Webshop/index.php?page=shoppingcart');
         }
     }
@@ -85,6 +86,8 @@ if ($_SESSION['role'] == '1') {
                 'user' => $_SESSION['Userid'],
                 'product' => $productid
             ]);
+
+            $_SESSION['Total_Cart_Price'] = 0;
             header('Location: ../../Webshop/index.php?page=shoppingcart');
         }
 
