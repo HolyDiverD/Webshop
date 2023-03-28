@@ -1,5 +1,36 @@
 <?php
 $userid = $_SESSION['Userid'];
+
+
+if($_SESSION['role'] == ''){
+    if(isset($_SESSION['cart'])){
+        foreach ($_SESSION['cart'] as $item){
+     ?>
+
+        <tr>
+            <td id=data-label="Name"> <?= $item['name']  ?> </td>
+            <td id=data-label="EAN"> <?= $item['ean'] ?> </td>
+            <td id=data-label="Price"> <?= $item['price'] ?> </td>
+            <td id=data-label="Remove">
+                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?= $item['id'] ?>"/>
+                <i class="fa fa-minus"></i>
+            </td>
+            <td id=data-label="Amount"> <?= $item['quantity'] ?> </td>
+            <td id=data-label="Add">
+                <a href="../../actions/action"/>
+                <i class="fa fa-plus"></i>
+            </td>
+        </tr>
+    <?php
+        }
+    }
+}
+else{
+
+
+}
+
+
 $sth = $dbh->prepare("
 SELECT shoppingcart_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount
 FROM shoppingbag
