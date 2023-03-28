@@ -2,6 +2,8 @@
 ?>
     <div class="product_edit_view">
         <table class="admintable" id=table>
+            <button class="OrderCartBttn" onclick="location.href='../../Webshop/index.php?page=order'"
+                    type="button">Order</button>
             <tr>
                 <th>Name</th>
                 <th>EAN</th>
