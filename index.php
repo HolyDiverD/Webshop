@@ -19,7 +19,8 @@ $customerpages = array(
         'register',
         'shoppingcart',
         'products',
-        'order'
+        'order',
+        'invoice'
 );
 
 if (is_null($_SESSION['role'])) {

@@ -12,10 +12,10 @@
                 <th>Amount</th>
                 <th>Add</th>
             </tr>
-            <p> Total Price: <?= $_SESSION['Total_Cart_Price']?> </p>
             <?php
             include 'actions/sa/shoppingcart_sa.php';
             ?>
+            <p> Total Price: <?= $_SESSION['Total_Cart_Price']?> </p>
         </table>
 
     </div>
