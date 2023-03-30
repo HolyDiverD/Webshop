@@ -30,9 +30,10 @@ if($_SESSION['role'] == ''){
 else{
 
     $sth = $dbh->prepare("
-SELECT shoppingcart_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount
-FROM shoppingbag
-JOIN products p on shoppingbag.FKproduct_id = p.product_id
+SELECT shoppingcart_id, FKproduct_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount
+FROM cart_products
+JOIN products p on p.product_id = cart_products.FKproduct_id
+JOIN shoppingbag s on cart_products.FKshoppingcart_id = s.shoppingcart_id
 WHERE FKuser_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
     $sth->execute([
@@ -51,12 +52,12 @@ WHERE FKuser_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             <td id=data-label="EAN"> <?= $row->product_EAN ?> </td>
             <td id=data-label="Price"> <?= $row->product_price ?> </td>
             <td id=data-label="Remove">
-                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?=$row->product_id?>"/>
+                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?=$row->product_id?>&cartid=<?=$row->shoppingcart_id?>"/>
                 <i class="fa fa-minus"></i>
             </td>
             <td id=data-label="Amount"> <?= $row->amount ?> </td>
             <td id=data-label="Add">
-                <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?=$row->product_id?>"/>
+                <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?=$row->product_id?>&cartid=<?=$row->shoppingcart_id?>"/>
                 <i class="fa fa-plus"></i>
             </td>
         </tr>

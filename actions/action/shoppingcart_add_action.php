@@ -8,6 +8,7 @@ $categoryid = $_GET['cat_id'];
 $productname = $_GET['pro_name'];
 $productEAN = $_GET['pro_EAN'];
 $productprice = $_GET['pro_price'];
+$cartid = $_GET['cartid'];
 
 if($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid])){
 
@@ -40,13 +41,13 @@ $stmt->execute([
 ]);
 
 $stmt = $dbh->prepare("
-        UPDATE shoppingbag 
+        UPDATE cart_products
         SET amount = (amount + 1)
-        WHERE FKproduct_id = :productid AND FKuser_id = :userid",
+        WHERE FKproduct_id = :productid AND FKshoppingcart_id = :cartid",
     array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $stmt->execute([
-    ':productid' => $productid,
-    ':userid' => $userid
+    'productid' => $productid,
+    'cartid' => $cartid
 ]);
 
 

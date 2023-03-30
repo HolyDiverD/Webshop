@@ -12,7 +12,7 @@ $productEAN = $_GET['pro_EAN'];
 $productprice = $_GET['pro_price'];
 
 
-if ($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid]))  {
+if ($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid])) {
     $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
@@ -27,9 +27,7 @@ if ($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid]))  {
 
     $_SESSION['AnotherOne'] = 'true';
     header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
-}
-else
-{
+} else {
     $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
@@ -52,17 +50,20 @@ else
     header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
 }
 
-if($_SESSION['role'] == '1') {
+if ($_SESSION['role'] == '1') {
     try {
         $sth = $dbh->prepare("
-SELECT FKproduct_id, FKuser_id, amount
+SELECT shoppingcart_id, FKproduct_id, FKuser_id, amount
 FROM shoppingbag
+JOIN cart_products cp on shoppingbag.shoppingcart_id = cp.FKshoppingcart_id
 WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $sth->execute([
             ':userid' => $userid,
             ':productid' => $productid
         ]);
+
+        $firstrow = $sth->fetch(PDO::FETCH_OBJ);
 
         if ($sth->rowcount() > 0) {
 
@@ -78,7 +79,8 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
 
             $stmt = $dbh->prepare("
         UPDATE shoppingbag 
-        SET amount = (amount + 1)
+        JOIN cart_products cp on shoppingbag.shoppingcart_id = cp.FKshoppingcart_id
+        SET cp.amount = (cp.amount + 1)
         WHERE FKproduct_id = :productid AND FKuser_id = :userid",
                 array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             $stmt->execute([
@@ -88,29 +90,77 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
 
             $_SESSION['AnotherOne'] = 'true';
             header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
-        }
-        else {
-            $stmt = $dbh->prepare("
+        } else {
+
+            if ($firstrow->shoppingcart_id == 0) {
+
+                $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
     WHERE product_id = :productid
     ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-            $stmt->execute([
-                ':productid' => $productid
-            ]);
+                $stmt->execute([
+                    ':productid' => $productid
+                ]);
 
-            $stmt = $dbh->prepare("
-    INSERT INTO shoppingbag (FKuser_id, FKproduct_id, amount)
-VALUES (:userid, :productid, 1)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $stmt = $dbh->prepare("
+    INSERT INTO shoppingbag (FKuser_id)
+    VALUES (:userid)", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-            $stmt->execute([
-                ':userid' => $userid,
-                ':productid' => $productid
-            ]);
+                $stmt->execute([
+                    ':userid' => $userid,
+                ]);
 
-            $_SESSION['AddCartSuccess'] = 'true';
-            header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
+                $sth = $dbh->prepare("SELECT shoppingcart_id 
+                                  FROM shoppingbag WHERE FKuser_id = :user",
+                    array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+                $sth->execute([
+                    'user' => $userid
+                ]);
+
+                $row = $sth->fetch(PDO::FETCH_OBJ);
+
+                $stmt = $dbh->prepare("INSERT INTO cart_products (FKshoppingcart_id, FKproduct_id, amount) 
+                                   VALUES (:cartid,:productid, 1)");
+
+                $stmt->execute([
+                    'cartid' => $row->shoppingcart_id,
+                    'productid' => $productid
+                ]);
+
+
+                $_SESSION['AddCartSuccess'] = 'true';
+                header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
+            }
+            else{
+
+                $sth = $dbh->prepare("SELECT shoppingcart_id 
+                                  FROM shoppingbag WHERE FKuser_id = :user",
+                    array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+                $sth->execute([
+                    'user' => $userid
+                ]);
+
+                $row = $sth->fetch(PDO::FETCH_OBJ);
+
+                $stmt = $dbh->prepare("INSERT INTO cart_products (FKshoppingcart_id, FKproduct_id, amount) 
+                                   VALUES (:cartid,:productid, 1)");
+
+                $stmt->execute([
+                    'cartid' => $row->shoppingcart_id,
+                    'productid' => $productid
+                ]);
+
+
+                $_SESSION['AddCartSuccess'] = 'true';
+                header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
+
+            }
+
+
         }
     } catch (PDOException $exception) {
         $exception->getMessage();

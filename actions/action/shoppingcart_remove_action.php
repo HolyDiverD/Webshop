@@ -3,6 +3,8 @@ session_start();
 require '../../../private/conn_Webshop.php';
 
 $productid = $_GET['pro_id'];
+$cartid = $_GET['cartid'];
+
 
 if ($_SESSION['role'] == '') {
 
@@ -39,11 +41,11 @@ if ($_SESSION['role'] == '1') {
 
     try {
         $stmt = $dbh->prepare("
-    SELECT amount FROM shoppingbag WHERE FKuser_id = :user AND FKproduct_id = :product
+    SELECT amount FROM cart_products WHERE FKshoppingcart_id = :cartid AND FKproduct_id = :product
     ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
         $stmt->execute([
-            'user' => $_SESSION['Userid'],
+            'cartid' => $cartid,
             'product' => $productid
         ]);
         $row = $stmt->fetch(PDO::FETCH_OBJ);
@@ -59,10 +61,10 @@ if ($_SESSION['role'] == '1') {
                 ]);
 
                 $sth = $dbh->prepare("
-            UPDATE shoppingbag SET amount = (amount - 1) WHERE FKuser_id = :user AND FKproduct_id = :product",
+            UPDATE cart_products SET amount = (amount - 1) WHERE FKshoppingcart_id = :cartid AND FKproduct_id = :product",
                     array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                 $sth->execute([
-                    'user' => $_SESSION['Userid'],
+                    'cartid' => $cartid,
                     'product' => $productid
                 ]);
 
@@ -79,13 +81,29 @@ if ($_SESSION['role'] == '1') {
                 'proid' => $productid
             ]);
 
-            $sth = $dbh->prepare("DELETE FROM shoppingbag WHERE FKuser_id = :user AND FKproduct_id = :product",
+            $sth = $dbh->prepare("DELETE FROM cart_products WHERE FKshoppingcart_id = :cartid AND FKproduct_id = :product",
                 array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
             $sth->execute([
-                'user' => $_SESSION['Userid'],
+                'cartid' => $cartid,
                 'product' => $productid
             ]);
+
+            $stmt = $dbh->prepare("SELECT * FROM cart_products WHERE FKshoppingcart_id =:cartid",
+                array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $stmt->execute([
+                'cartid' => $cartid
+            ]);
+
+            if($stmt->rowcount() == 0){
+
+                $stmt = $dbh->prepare("DELETE FROM shoppingbag WHERE shoppingcart_id = :cartid",
+                    array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $stmt->execute([
+                    'cartid' => $cartid
+                ]);
+
+            }
 
             $_SESSION['Total_Cart_Price'] = 0;
             header('Location: ../../Webshop/index.php?page=shoppingcart');
