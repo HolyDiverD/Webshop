@@ -1,4 +1,10 @@
 <?php
+If(isset($_SESSION['Cart_Empty_Error'])){
+    echo '<script type="text/javascript">
+       window.onload = function () { alert("Your shoppingcart is empty!"); } 
+</script>';
+    unset($_SESSION['Cart_Empty_Error']);
+}
 ?>
     <div class="product_edit_view">
         <table class="admintable" id=table>

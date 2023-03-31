@@ -13,7 +13,7 @@ try {
         echo '<button class="subnavbtn">' . $name . ' <i class="fa fa-caret-down"></i></button>';
         echo '<div class="subnav-content">';
         echo '<a href="index.php?page=logout">Logout</a>';
-        echo '<a href="index.php?page=">My Orders</a>';
+        echo '<a href="index.php?page=my_orders">My Orders</a>';
         echo '</div>';
         echo '</div>';
         echo '<div class="subnav">';

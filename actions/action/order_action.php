@@ -14,7 +14,7 @@ $stmt->execute([
     'user' => $userid
 ]);
 
-    $stmt = $dbh->prepare("
+    $sth = $dbh->prepare("
 SELECT order_id FROM orders WHERE FKuser_id = :user
 ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 

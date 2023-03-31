@@ -20,7 +20,8 @@ $customerpages = array(
         'shoppingcart',
         'products',
         'order',
-        'invoice'
+        'invoice',
+        'my_orders'
 );
 
 if (!isset($_SESSION['role'])) {
