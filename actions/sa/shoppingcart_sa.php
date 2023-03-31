@@ -1,5 +1,7 @@
 <?php
-$userid = $_SESSION['Userid'];
+if(isset($_SESSION['Userid'])){
+    $userid = $_SESSION['Userid'];
+}
 $total_price = 0;
 
 if($_SESSION['role'] == ''){

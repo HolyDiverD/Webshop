@@ -6,8 +6,6 @@ $street = $_POST["street"];
 $housenumber = $_POST["housenumber"];
 $postalcode = $_POST["postalcode"];
 $email = $_POST["email"];
-
-
 ?>
 
 <div class="Ordercontainer">
@@ -25,8 +23,7 @@ $email = $_POST["email"];
  </div>
     <div class="product_edit_view">
         <table class="admintable" id=table>
-            <button class="OrderCartBttn" onclick="location.href=''"
-                    type="button">Order</button>
+
             <tr>
                 <th>Name</th>
                 <th>EAN</th>
@@ -36,8 +33,11 @@ $email = $_POST["email"];
             <?php
             include 'actions/sa/invoice_sa.php';
             ?>
-            <p> Total Price: <?= $_SESSION['Total_Cart_Price']?> </p>
+
         </table>
+        <p> Total Price: <?= $_SESSION['Total_Cart_Price']?> </p>
+        <button class="OrderCartBttn" onclick="location.href='../../actions/action/order_action.php'"
+                type="button">Order</button>
 
     </div>
 </div>

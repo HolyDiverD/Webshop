@@ -23,7 +23,7 @@ $customerpages = array(
         'invoice'
 );
 
-if (is_null($_SESSION['role'])) {
+if (!isset($_SESSION['role'])) {
     $_SESSION['role'] = '';
 }
 if ($_SESSION['role'] == '') {
