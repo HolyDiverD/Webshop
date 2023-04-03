@@ -6,23 +6,20 @@ $userid = $_SESSION['Userid'];
 
 if ($_SESSION['role'] == '1'){
 
-$stmt = $dbh->prepare("
-INSERT INTO orders (FKuser_id) VALUES (:user)
-",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
+$stmt = $dbh->prepare("INSERT INTO orders (FKuser_id) VALUES (:user)");
 $stmt->execute([
     'user' => $userid
 ]);
 
-    $sth = $dbh->prepare("
-SELECT order_id FROM orders WHERE FKuser_id = :user
-",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+//$sth = $dbh->prepare("SELECT order_id FROM orders WHERE FKuser_id = :user",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+//
+//    $sth->execute([
+//        'user' => $userid
+//    ]);
+//    $order = $sth->fetch(PDO::FETCH_OBJ);
+//    $orderid = $order->order_id;
 
-    $stmt->execute([
-        'user' => $userid
-    ]);
-    $order = $stmt->fetch(PDO::FETCH_OBJ);
-    $orderid = $order->order_id;
+    $orderid = $dbh->lastInsertId();
 
     $sth = $dbh->prepare("
 SELECT * FROM cart_products 

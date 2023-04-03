@@ -11,7 +11,8 @@ $adminpages = array(
     'product_add',
     'product_delete',
     'product_edit',
-    'product_edit_page');
+    'product_edit_page',
+    'customer_orders');
 
 $customerpages = array(
         'login',

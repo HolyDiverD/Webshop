@@ -5,6 +5,9 @@ If(isset($_SESSION['Cart_Empty_Error'])){
 </script>';
     unset($_SESSION['Cart_Empty_Error']);
 }
+if(!isset($_SESSION['Total_Cart_Price'])){
+    $_SESSION['Total_Cart_Price'] = 0;
+}
 ?>
     <div class="product_edit_view">
         <table class="admintable" id=table>

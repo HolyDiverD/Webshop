@@ -3,6 +3,8 @@ if(isset($_SESSION['Userid'])){
     $userid = $_SESSION['Userid'];
 }
 $total_price = 0;
+$_SESSION['Total_Cart_Price'] = 0;
+
 
 if($_SESSION['role'] == ''){
     if(isset($_SESSION['cart'])){
