@@ -1,7 +1,4 @@
 <?php
-if(!isset($_SESSION['User_On_Display'])){
-    $_SESSION['User_On_Display'] = 'No one';
-}
 ?>
 <div class="Admin_order_selection">
     <table class="admintable" id=table>
@@ -15,8 +12,8 @@ if(!isset($_SESSION['User_On_Display'])){
     </table>
 </div>
 <div class="Admin_order_view">
-    <p>Current user displayed: <?= $_SESSION['User_On_Display']?></p>
-    <?php
+        <?php
         include 'actions/sa/admin_order_sa.php';
         ?>
+
 </div>

@@ -21,6 +21,10 @@ ORDER BY o.order_id", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->execute([
     ':user' => $userid
 ]);
+$row = $sth->fetch(PDO::FETCH_OBJ);
+?>
+    <p>Current user displayed: <?= $row->user_email?></p>
+<?php
 
 while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
     $_SESSION['User_On_Display'] = $row->user_email;
