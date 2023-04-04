@@ -1,28 +1,29 @@
 <?php
-if(isset($_SESSION['Userid'])){
-    $userid = $_SESSION['Userid'];
-}
 if(isset($_GET['user'])){
     $userid = $_GET['user'];
+
+    $stmt = $dbh->prepare("
+SELECT user_email
+FROM users
+WHERE user_id = :user AND FKuser_role = 1", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+    $stmt->execute([
+        ':user' => $userid
+    ]);
+
+    $mail = $stmt->fetch(PDO::FETCH_OBJ);
+
+    ?>
+    <p>Current user displayed: <?=$mail->user_email?> </p>
+    <?php
 }
+else{
+    $userid = '';
+}
+
 $total_price = 0;
 $prev_order_id = 0;
 $is_first_order = true;
-
-$stmt = $dbh->prepare("
-SELECT user_email
-FROM users
-WHERE user_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-$stmt->execute([
-    ':user' => $userid
-]);
-
-$mail = $stmt->fetch(PDO::FETCH_OBJ);
-
-?>
-    <p>Current user displayed: <?=$mail->user_email?> </p>
-<?php
 
 $sth = $dbh->prepare("
 SELECT user_email, o.order_id, o.date_of_creation, p.product_name, p.product_EAN, p.product_price, amount
