@@ -2,6 +2,9 @@
 if(isset($_SESSION['Userid'])){
     $userid = $_SESSION['Userid'];
 }
+if(isset($_GET['user'])){
+    $userid = $_GET['user'];
+}
 $total_price = 0;
 $prev_order_id = 0;
 $is_first_order = true;

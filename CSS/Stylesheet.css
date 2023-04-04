@@ -236,3 +236,24 @@ table {
 .myimage{
     max-width: 100%;
 }
+.Admin_order_selection{
+    text-align: left;
+    background-color: #f2f2f2;
+    width: 20%;
+    padding: 20px;
+    margin-top: 2%;
+    margin-left: 7%;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    float: left;
+}
+.Admin_order_view{
+    margin-top: 5%;
+    margin-left: 35%;
+    padding: 25px;
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 50%;
+
+}

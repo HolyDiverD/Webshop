@@ -52,7 +52,7 @@ try {
             <a href="index.php?page=product_delete">Delete</a>
         </div>
     </div>
-    <a class="home fa fa-list" href="index.php?page=">Orders</a>
+    <a class="home fa fa-list" href="index.php?page=admin_orders">Orders</a>
 </div>';
     } else {
         echo '<div class="navbar">';
