@@ -9,6 +9,21 @@ $total_price = 0;
 $prev_order_id = 0;
 $is_first_order = true;
 
+$stmt = $dbh->prepare("
+SELECT user_email
+FROM users
+WHERE user_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+$stmt->execute([
+    ':user' => $userid
+]);
+
+$mail = $stmt->fetch(PDO::FETCH_OBJ);
+
+?>
+    <p>Current user displayed: <?=$mail->user_email?> </p>
+<?php
+
 $sth = $dbh->prepare("
 SELECT user_email, o.order_id, o.date_of_creation, p.product_name, p.product_EAN, p.product_price, amount
 FROM order_products
@@ -21,13 +36,8 @@ ORDER BY o.order_id", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $sth->execute([
     ':user' => $userid
 ]);
-$row = $sth->fetch(PDO::FETCH_OBJ);
-?>
-    <p>Current user displayed: <?= $row->user_email?></p>
-<?php
 
 while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-    $_SESSION['User_On_Display'] = $row->user_email;
     $product_price = $row->product_price * $row->amount;
     $total_price += $product_price;
     $_SESSION['Total_Order_Price'] = $total_price;
