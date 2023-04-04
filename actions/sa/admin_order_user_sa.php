@@ -6,10 +6,13 @@ SELECT user_id, user_email FROM users WHERE FKuser_role = 1
 $stmt->execute();
 
 while($users = $stmt->fetch(PDO::FETCH_OBJ)){?>
-    <p><?= $users->user_email ?> <button class="AddToCartBttn"
-                                      onclick="location.href='../../Webshop/index.php?page=admin_orders&user=<?= $users->user_id?>'"
-                                         type="button">View Orders</button></p>
+        <tr>
+            <td><?= $users->user_email ?></td>
+            <td><button class="AddToCartBttn"
+                        onclick="location.href='../../Webshop/index.php?page=admin_orders&user=<?= $users->user_id?>'"
+                        type="button">View Orders</button></td>
 
+        </tr>
 <?php
 }
 

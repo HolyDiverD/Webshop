@@ -10,10 +10,11 @@ $prev_order_id = 0;
 $is_first_order = true;
 
 $sth = $dbh->prepare("
-SELECT o.order_id, o.date_of_creation, p.product_name, p.product_EAN, p.product_price, amount
+SELECT user_email, o.order_id, o.date_of_creation, p.product_name, p.product_EAN, p.product_price, amount
 FROM order_products
 JOIN orders o on o.order_id = order_products.FKorder_id
 JOIN products p on p.product_id = order_products.FKproduct_id
+JOIN users u on u.user_id = o.FKuser_id
 WHERE FKuser_id = :user
 ORDER BY o.order_id", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
@@ -22,10 +23,10 @@ $sth->execute([
 ]);
 
 while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-
+    $_SESSION['User_On_Display'] = $row->user_email;
     $product_price = $row->product_price * $row->amount;
     $total_price += $product_price;
-    $_SESSION['Total_Cart_Price'] = $total_price;
+    $_SESSION['Total_Order_Price'] = $total_price;
 
     if ($row->order_id != $prev_order_id) {
         if (!$is_first_order) {
