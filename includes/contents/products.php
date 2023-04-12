@@ -29,7 +29,7 @@ WHERE FKcategory_id = :categoryid");
 
         <div class="product_list_view">
             <div class="product_list_img">
-                <img class="myimage" src="<?= $row->product_img ?>">
+                <img class="myimage" src="data:image/png;base64,<?= $row->product_img ?>">
             </div>
             <p><?= $row->product_name ?></p>
             <p>EAN: <?= $row->product_EAN ?></p>

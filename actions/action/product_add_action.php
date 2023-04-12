@@ -7,7 +7,7 @@ $EAN = $_POST['ean'];
 $price = $_POST['price'];
 $amount = $_POST['amount'];
 $category = $_POST['category'];
-$image = $_POST['img'];
+$image = base64_encode(file_get_contents($_FILES['img']['tmp_name']));
 
 try {
 

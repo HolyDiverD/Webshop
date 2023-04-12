@@ -19,7 +19,7 @@ if (isset($_SESSION['product_input_fail'])) {
 }
 ?>
 <div class="add">
-    <form action="actions/action/product_add_action.php" method="post" id="Add">
+    <form action="actions/action/product_add_action.php" method="post" enctype="multipart/form-data" id="Add">
         <label for="name"><b>Product name</b></label>
         <input type="text" placeholder="Enter product name" name="name" required>
 
@@ -41,7 +41,7 @@ if (isset($_SESSION['product_input_fail'])) {
         <label for="img">
             <b>Image</b>
         </label>
-        <input type="text" placeholder="Enter image url" name="img" required>
+        <input type="file" placeholder="Select Image" accept="image/*" name="img" required>
 
         <?php
         include 'actions/sa/product_cat_sa.php';
