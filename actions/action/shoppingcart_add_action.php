@@ -10,7 +10,7 @@ $productEAN = $_GET['pro_EAN'];
 $productprice = $_GET['pro_price'];
 $cartid = $_GET['cartid'];
 
-if($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid])){
+if ($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid])) {
 
     $stmt = $dbh->prepare("
     UPDATE products 
@@ -29,27 +29,27 @@ if($_SESSION['role'] == '' && isset($_SESSION['cart'][$productid])){
 
 }
 
-if($_SESSION['role'] == '1'){
-$stmt = $dbh->prepare("
+if ($_SESSION['role'] == '1') {
+    $stmt = $dbh->prepare("
     UPDATE products 
     SET product_amount = (product_amount - 1)
     WHERE product_id = :productid
     ", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-$stmt->execute([
-    ':productid' => $productid
-]);
+    $stmt->execute([
+        ':productid' => $productid
+    ]);
 
-$stmt = $dbh->prepare("
+    $stmt = $dbh->prepare("
         UPDATE cart_products
         SET amount = (amount + 1)
         WHERE FKproduct_id = :productid AND FKshoppingcart_id = :cartid",
-    array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-$stmt->execute([
-    'productid' => $productid,
-    'cartid' => $cartid
-]);
+        array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $stmt->execute([
+        'productid' => $productid,
+        'cartid' => $cartid
+    ]);
 
 
-header('Location:  ../../Webshop/index.php?page=shoppingcart');
+    header('Location:  ../../Webshop/index.php?page=shoppingcart');
 }

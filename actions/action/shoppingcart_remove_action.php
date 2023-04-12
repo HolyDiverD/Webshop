@@ -95,7 +95,7 @@ if ($_SESSION['role'] == '1') {
                 'cartid' => $cartid
             ]);
 
-            if($stmt->rowcount() == 0){
+            if ($stmt->rowcount() == 0) {
 
                 $stmt = $dbh->prepare("DELETE FROM shoppingbag WHERE shoppingcart_id = :cartid",
                     array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

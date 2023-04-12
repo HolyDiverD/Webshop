@@ -13,7 +13,7 @@ FROM categories");
         echo '</td>';
         echo '</tr>';
     }
-}catch (PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }
 

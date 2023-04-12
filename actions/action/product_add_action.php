@@ -49,8 +49,7 @@ try {
             ]);
             $_SESSION['product_add_success'] = 'true';
             header('Location: ../../index.php?page=product_add');
-        }
-        else{
+        } else {
             $_SESSION['product_input_fail'] = 'true';
             header('Location: ../../index.php?page=product_add');
         }

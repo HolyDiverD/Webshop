@@ -3,7 +3,7 @@ session_start();
 require '../private/conn_Webshop.php';
 
 $adminpages = array(
-        'admin',
+    'admin',
     'cat_edit_page',
     'category_add',
     'category_delete',
@@ -15,14 +15,14 @@ $adminpages = array(
     'customer_orders');
 
 $customerpages = array(
-        'login',
-        'main',
-        'register',
-        'shoppingcart',
-        'products',
-        'order',
-        'invoice',
-        'my_orders'
+    'login',
+    'main',
+    'register',
+    'shoppingcart',
+    'products',
+    'order',
+    'invoice',
+    'my_orders'
 );
 
 if (!isset($_SESSION['role'])) {
@@ -41,13 +41,13 @@ if ($page == 'logout') {
     $_SESSION['Userid'] = '';
     $page = 'main';
 }
-if ($_SESSION['role'] == '' && in_array($page, $adminpages)){
+if ($_SESSION['role'] == '' && in_array($page, $adminpages)) {
     $page = 'main';
 }
-if ($_SESSION['role'] == '1' && in_array($page, $adminpages)){
+if ($_SESSION['role'] == '1' && in_array($page, $adminpages)) {
     $page = 'main';
 }
-if ($_SESSION['role'] == '2' && in_array($page, $customerpages)){
+if ($_SESSION['role'] == '2' && in_array($page, $customerpages)) {
     $page = 'admin';
 }
 ?>

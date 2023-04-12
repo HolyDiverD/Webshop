@@ -18,9 +18,8 @@ $stmt->execute([
 if ($stmt->rowcount() > 0) {
     $_SESSION['cat_edit_fail'] = 'true';
     header('Location:  ../../index.php?page=category_edit');
-}
-else{
-    try{
+} else {
+    try {
         $stmt = $dbh->prepare("UPDATE categories
 SET category_name = :newname
 WHERE category_id = :catid", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -31,8 +30,7 @@ WHERE category_id = :catid", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         ]);
 
         header('Location:  ../../index.php?page=category_edit');
-    }
-    catch (PDOException $exception){
+    } catch (PDOException $exception) {
         $exception->getMessage();
     }
 }

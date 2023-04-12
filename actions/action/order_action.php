@@ -2,13 +2,15 @@
 session_start();
 require '../../../private/conn_Webshop.php';
 
+$total_price = $_SESSION['Total_Cart_Price'];
 $userid = $_SESSION['Userid'];
 
 if ($_SESSION['role'] == '1'){
 
-$stmt = $dbh->prepare("INSERT INTO orders (FKuser_id) VALUES (:user)");
+$stmt = $dbh->prepare("INSERT INTO orders (FKuser_id, total_price) VALUES (:user, :totalprice)");
 $stmt->execute([
-    'user' => $userid
+    'user' => $userid,
+    'totalprice' => $total_price
 ]);
 
 //$sth = $dbh->prepare("SELECT order_id FROM orders WHERE FKuser_id = :user",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

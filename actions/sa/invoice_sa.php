@@ -1,18 +1,18 @@
 <?php
-if(isset($_SESSION['Userid'])){
+if (isset($_SESSION['Userid'])) {
     $userid = $_SESSION['Userid'];
 }
 $total_price = 0;
 
-if($_SESSION['role'] == ''){
-    if(isset($_SESSION['cart'])){
-        foreach ($_SESSION['cart'] as $item){
+if ($_SESSION['role'] == '') {
+    if (isset($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $item) {
 
             $product_price = $item['price'] * $item['quantity'];
             $total_price += $product_price;
             $_SESSION['Total_Cart_Price'] = $total_price; ?>
             <tr>
-                <td id=data-label="Name"> <?= $item['name']  ?> </td>
+                <td id=data-label="Name"> <?= $item['name'] ?> </td>
                 <td id=data-label="EAN"> <?= $item['ean'] ?> </td>
                 <td id=data-label="Price"> <?= $item['price'] ?> </td>
                 <td id=data-label="Amount"> <?= $item['quantity'] ?> </td>
@@ -20,8 +20,7 @@ if($_SESSION['role'] == ''){
             <?php
         }
     }
-}
-else{
+} else {
 
     $sth = $dbh->prepare("
 SELECT shoppingcart_id, FKproduct_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount

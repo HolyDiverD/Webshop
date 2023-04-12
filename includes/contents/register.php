@@ -1,11 +1,11 @@
 <?php
-if (isset($_SESSION['registeralert'])){
+if (isset($_SESSION['registeralert'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Registration failed, please check if user data has been filled in correctly."); } 
 </script>';
     unset($_SESSION['registeralert']);
 }
-if (isset($_SESSION['SameEmail'])){
+if (isset($_SESSION['SameEmail'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("An account for this email already exists."); } 
 </script>';

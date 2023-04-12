@@ -1,37 +1,36 @@
 <?php
-if(isset($_SESSION['Userid'])){
+if (isset($_SESSION['Userid'])) {
     $userid = $_SESSION['Userid'];
 }
 $total_price = 0;
 $_SESSION['Total_Cart_Price'] = 0;
 
 
-if($_SESSION['role'] == ''){
-    if(isset($_SESSION['cart'])){
-        foreach ($_SESSION['cart'] as $item){
+if ($_SESSION['role'] == '') {
+    if (isset($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $item) {
 
             $product_price = $item['price'] * $item['quantity'];
             $total_price += $product_price;
             $_SESSION['Total_Cart_Price'] = $total_price; ?>
-        <tr>
-            <td id=data-label="Name"> <?= $item['name']  ?> </td>
-            <td id=data-label="EAN"> <?= $item['ean'] ?> </td>
-            <td id=data-label="Price"> <?= $item['price'] ?> </td>
-            <td id=data-label="Remove">
-                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?= $item['id'] ?>"/>
-                <i class="fa fa-minus"></i>
-            </td>
-            <td id=data-label="Amount"> <?= $item['quantity'] ?> </td>
-            <td id=data-label="Add">
-                <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?= $item['id'] ?>"/>
-                <i class="fa fa-plus"></i>
-            </td>
-        </tr>
-    <?php
+            <tr>
+                <td id=data-label="Name"> <?= $item['name'] ?> </td>
+                <td id=data-label="EAN"> <?= $item['ean'] ?> </td>
+                <td id=data-label="Price"> <?= $item['price'] ?> </td>
+                <td id=data-label="Remove">
+                    <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?= $item['id'] ?>"/>
+                    <i class="fa fa-minus"></i>
+                </td>
+                <td id=data-label="Amount"> <?= $item['quantity'] ?> </td>
+                <td id=data-label="Add">
+                    <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?= $item['id'] ?>"/>
+                    <i class="fa fa-plus"></i>
+                </td>
+            </tr>
+            <?php
         }
     }
-}
-else{
+} else {
 
     $sth = $dbh->prepare("
 SELECT shoppingcart_id, FKproduct_id, p.product_id ,p.product_name, p.product_EAN, p.product_price, amount
@@ -56,12 +55,12 @@ WHERE FKuser_id = :user", array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             <td id=data-label="EAN"> <?= $row->product_EAN ?> </td>
             <td id=data-label="Price"> <?= $row->product_price ?> </td>
             <td id=data-label="Remove">
-                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?=$row->product_id?>&cartid=<?=$row->shoppingcart_id?>"/>
+                <a href="../../actions/action/shoppingcart_remove_action.php?pro_id=<?= $row->product_id ?>&cartid=<?= $row->shoppingcart_id ?>"/>
                 <i class="fa fa-minus"></i>
             </td>
             <td id=data-label="Amount"> <?= $row->amount ?> </td>
             <td id=data-label="Add">
-                <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?=$row->product_id?>&cartid=<?=$row->shoppingcart_id?>"/>
+                <a href="../../actions/action/shoppingcart_add_action.php?pro_id=<?= $row->product_id ?>&cartid=<?= $row->shoppingcart_id ?>"/>
                 <i class="fa fa-plus"></i>
             </td>
         </tr>

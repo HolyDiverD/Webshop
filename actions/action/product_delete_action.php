@@ -18,6 +18,6 @@ try {
 
     header('Location: ../../index.php?page=product_delete');
 
-}catch (PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }

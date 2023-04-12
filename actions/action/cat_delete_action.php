@@ -16,7 +16,7 @@ try {
     ]);
     header('Location: ../../index.php?page=category_delete');
 
-}catch (PDOException $exception){
+} catch (PDOException $exception) {
     $exception->getMessage();
 }
 

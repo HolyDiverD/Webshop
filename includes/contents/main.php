@@ -1,11 +1,11 @@
 <?php
-If(isset($_SESSION['Customer_order_success'])){
+if (isset($_SESSION['Customer_order_success'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully ordered!"); } 
 </script>';
     unset($_SESSION['Customer_order_success']);
 }
-If(isset($_SESSION['Guest_order_success'])){
+if (isset($_SESSION['Guest_order_success'])) {
     echo '<script type="text/javascript">
        window.onload = function () { alert("Product was successfully ordered!"); } 
 </script>';

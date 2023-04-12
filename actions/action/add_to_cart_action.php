@@ -133,8 +133,7 @@ WHERE FKuser_id = :userid AND FKproduct_id = :productid", array(PDO::ATTR_CURSOR
 
                 $_SESSION['AddCartSuccess'] = 'true';
                 header('Location:  ../../index.php?page=products&ID=' . $categoryid . '');
-            }
-            else{
+            } else {
 
                 $sth = $dbh->prepare("SELECT shoppingcart_id 
                                   FROM shoppingbag WHERE FKuser_id = :user",
