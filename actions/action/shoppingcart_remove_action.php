@@ -30,7 +30,7 @@ if ($_SESSION['role'] == '') {
                 'proid' => $productid
             ]);
 
-            unset($_SESSION['cart'][$productid]);
+            unset($_SESSION['cart']);
             $_SESSION['Total_Cart_Price'] = 0;
             header('Location: ../../Webshop/index.php?page=shoppingcart');
         }
