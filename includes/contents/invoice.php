@@ -6,6 +6,19 @@ $street = $_POST["street"];
 $housenumber = $_POST["housenumber"];
 $postalcode = $_POST["postalcode"];
 $email = $_POST["email"];
+
+
+if ($firstname == '' &&
+    $lastname == '' &&
+    $residence == '' &&
+    $street == '' &&
+    $housenumber == '' &&
+    $postalcode == '' &&
+    $email == '')
+{
+    header('Location: ../Webshop/index.php?page=order');
+}
+else{
 ?>
 
 <div class="Ordercontainer">
@@ -41,6 +54,6 @@ $email = $_POST["email"];
 
     </div>
 </div>
-
+<?php }
 
 

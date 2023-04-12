@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['Userid'])){
+if (isset($_SESSION['Userid'])) {
     $userid = $_SESSION['Userid'];
 }
 $total_price = 0;
@@ -43,7 +43,6 @@ while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
         <tbody>
         <?php
     }
-
     ?>
     <tr>
         <td><?= $row->date_of_creation ?></td>
